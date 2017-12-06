@@ -101,6 +101,7 @@ create table OFFICE_REQUEST_FILE (
 )^
 -- end OFFICE_REQUEST_FILE
 -- begin SEC_USER
+alter table SEC_USER add column REQUEST_ID varchar(36) ^
 alter table SEC_USER add column REQUEST_POSITION integer ^
 alter table SEC_USER add column REQUEST_COUNT integer ^
 alter table SEC_USER add column REQUEST_THRESHOLD integer ^

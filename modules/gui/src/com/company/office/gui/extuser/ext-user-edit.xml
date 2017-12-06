@@ -11,6 +11,10 @@
                   visible="false">
             <fieldGroup id="fieldGroupApplicant">
                 <field datasource="userDs"
+                       editable="false"
+                       property="request"/>
+                <field datasource="userDs"
+                       editable="false"
                        property="requestPosition"/>
             </fieldGroup>
             <fieldGroup id="fieldGroupWorker">

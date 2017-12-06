@@ -44,6 +44,7 @@
                 <column id="active"/>
                 <column id="changePasswordAtNextLogon"/>
                 <column id="group"/>
+                <column id="request"/>
                 <column id="requestPosition"/>
             </columns>
             <rows datasource="extUsersDs"/>

@@ -20,3 +20,6 @@ alter table OFFICE_REQUEST_FILE add constraint FK_OFFICE_REQUEST_FILE_REQUEST fo
 alter table OFFICE_REQUEST_FILE add constraint FK_OFFICE_REQUEST_FILE_FILE foreign key (FILE_ID) references SYS_FILE(ID)^
 create index IDX_OFFICE_REQUEST_FILE_REQUEST on OFFICE_REQUEST_FILE (REQUEST_ID)^
 -- end OFFICE_REQUEST_FILE
+-- begin SEC_USER
+alter table SEC_USER add constraint FK_SEC_USER_REQUEST foreign key (REQUEST_ID) references OFFICE_REQUEST(ID)^
+-- end SEC_USER

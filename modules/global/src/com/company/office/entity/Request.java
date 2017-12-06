@@ -64,6 +64,7 @@ public class Request extends StandardEntity {
     @OneToMany(mappedBy = "request")
     protected List<RequestFile> files;
 
+
     public ExtUser getApplicant() {
         return applicant;
     }

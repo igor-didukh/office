@@ -6,6 +6,12 @@
         <property name="requestPosition"/>
         <property name="requestCount"/>
         <property name="requestThreshold"/>
+        <property name="request"
+                  view="_minimal">
+            <property name="position"/>
+            <property name="worker"
+                      view="_minimal"/>
+        </property>
     </view>
     <view class="com.company.office.entity.ExtUser"
           extends="user.browse"
@@ -13,5 +19,10 @@
         <property name="requestPosition"/>
         <property name="requestCount"/>
         <property name="requestThreshold"/>
+        <property name="request"
+                  view="_minimal">
+            <property name="worker"
+                      view="_minimal"/>
+        </property>
     </view>
 </views>

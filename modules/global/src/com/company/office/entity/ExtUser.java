@@ -15,6 +15,10 @@ import com.haulmont.cuba.core.entity.annotation.Extends;
 public class ExtUser extends User {
     private static final long serialVersionUID = -8692350638050790495L;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "REQUEST_ID")
+    protected Request request;
+
     @Column(name = "REQUEST_POSITION")
     protected Integer requestPosition;
 
@@ -24,6 +28,16 @@ public class ExtUser extends User {
     @Column(name = "REQUEST_THRESHOLD")
     protected Integer requestThreshold;
 
+
+
+
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+
+    public Request getRequest() {
+        return request;
+    }
 
 
     public void setRequestPosition(Position requestPosition) {
