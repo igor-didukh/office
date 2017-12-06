@@ -18,22 +18,22 @@ import com.haulmont.cuba.core.global.DeletePolicy;
 import java.util.List;
 import javax.persistence.OneToMany;
 
-@NamePattern("%s|extUser")
+@NamePattern("%s|applicant")
 @Table(name = "OFFICE_REQUEST")
 @Entity(name = "office$Request")
 public class Request extends StandardEntity {
     private static final long serialVersionUID = 1078634413564627380L;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "EXT_USER_ID", unique = true)
-    protected ExtUser extUser;
+    @JoinColumn(name = "APPLICANT_ID", unique = true)
+    protected ExtUser applicant;
 
     @Column(name = "POSITION_", nullable = false)
     protected Integer position;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "USER_ID")
-    protected User user;
+    @JoinColumn(name = "WORKER_ID")
+    protected ExtUser worker;
 
     @Column(name = "COUNTER")
     protected Integer counter;
@@ -59,6 +59,39 @@ public class Request extends StandardEntity {
     @OneToMany(mappedBy = "request")
     protected List<RequestStatus> states;
 
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "request")
+    protected List<RequestFile> files;
+
+    public ExtUser getApplicant() {
+        return applicant;
+    }
+
+    public void setApplicant(ExtUser applicant) {
+        this.applicant = applicant;
+    }
+
+
+    public ExtUser getWorker() {
+        return worker;
+    }
+
+    public void setWorker(ExtUser worker) {
+        this.worker = worker;
+    }
+
+
+
+    public void setFiles(List<RequestFile> files) {
+        this.files = files;
+    }
+
+    public List<RequestFile> getFiles() {
+        return files;
+    }
+
+
     public void setActs(List<RequestAct> acts) {
         this.acts = acts;
     }
@@ -77,28 +110,12 @@ public class Request extends StandardEntity {
     }
 
 
-    public void setExtUser(ExtUser extUser) {
-        this.extUser = extUser;
-    }
-
-    public ExtUser getExtUser() {
-        return extUser;
-    }
-
     public void setPosition(Position position) {
         this.position = position == null ? null : position.getId();
     }
 
     public Position getPosition() {
         return position == null ? null : Position.fromId(position);
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     public void setCounter(Integer counter) {

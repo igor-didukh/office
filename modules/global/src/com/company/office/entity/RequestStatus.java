@@ -31,10 +31,19 @@ public class RequestStatus extends StandardEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
-    protected IntUser user;
+    protected ExtUser user;
 
     @Column(name = "DESCRIPTION", length = 100)
     protected String description;
+
+    public ExtUser getUser() {
+        return user;
+    }
+
+    public void setUser(ExtUser user) {
+        this.user = user;
+    }
+
 
     public void setRequest(Request request) {
         this.request = request;
@@ -59,14 +68,6 @@ public class RequestStatus extends StandardEntity {
 
     public Position getPosition() {
         return position == null ? null : Position.fromId(position);
-    }
-
-    public void setUser(IntUser user) {
-        this.user = user;
-    }
-
-    public IntUser getUser() {
-        return user;
     }
 
     public void setDescription(String description) {

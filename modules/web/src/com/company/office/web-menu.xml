@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
-    <menu id="application-office" insertBefore="administration">
+    <menu id="application-office"
+          insertBefore="administration">
+        <item screen="main-settings-screen"/>
+        <item screen="office$ExtUser.applicants-browse"/>
+        <item screen="office$ExtUser.workers-browse"/>
     </menu>
 </menu-config>

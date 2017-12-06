@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
-
     <include file="com/company/office/screens.xml"/>
-
+    <screen id="main-settings-screen"
+            template="com/company/office/web/screens/main-settings-screen.xml"/>
+    <screen id="office$ExtUser.applicants-browse"
+            template="com/company/office/web/extuser/ext-user-applicants-browse.xml"/>
+    <screen id="office$ExtUser.workers-browse"
+            template="com/company/office/web/extuser/ext-user-workers-browse.xml"/>
 </screen-config>
