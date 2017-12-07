@@ -52,7 +52,7 @@ public class Request extends StandardEntity {
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "request")
-    protected List<RequestAct> acts;
+    protected List<RequestAction> acts;
 
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
@@ -63,6 +63,15 @@ public class Request extends StandardEntity {
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "request")
     protected List<RequestFile> files;
+
+    public List<RequestAction> getActs() {
+        return acts;
+    }
+
+    public void setActs(List<RequestAction> acts) {
+        this.acts = acts;
+    }
+
 
 
     public ExtUser getApplicant() {
@@ -92,14 +101,6 @@ public class Request extends StandardEntity {
         return files;
     }
 
-
-    public void setActs(List<RequestAct> acts) {
-        this.acts = acts;
-    }
-
-    public List<RequestAct> getActs() {
-        return acts;
-    }
 
 
     public void setStates(List<RequestStatus> states) {

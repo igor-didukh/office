@@ -9,18 +9,18 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Table(name = "OFFICE_ACT")
-@Entity(name = "office$Act")
-public class Act extends StandardEntity {
+@Table(name = "OFFICE_STEP_ACTION")
+@Entity(name = "office$StepAction")
+public class StepAction extends StandardEntity {
     private static final long serialVersionUID = 8530702335739023159L;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "STEP_ID")
+    protected Step step;
 
     @NotNull
     @Column(name = "TYPE_", nullable = false)
     protected String type;
-
-    @NotNull
-    @Column(name = "POSITION_", nullable = false)
-    protected Integer position;
 
     @Column(name = "DESCRIPTION", length = 100)
     protected String description;
@@ -32,6 +32,15 @@ public class Act extends StandardEntity {
 
     @Column(name = "RESULT_REQUIRED")
     protected Boolean resultRequired;
+
+    public void setStep(Step step) {
+        this.step = step;
+    }
+
+    public Step getStep() {
+        return step;
+    }
+
 
     public void setResultRequired(Boolean resultRequired) {
         this.resultRequired = resultRequired;
@@ -51,20 +60,12 @@ public class Act extends StandardEntity {
     }
 
 
-    public void setPosition(Position position) {
-        this.position = position == null ? null : position.getId();
-    }
-
-    public Position getPosition() {
-        return position == null ? null : Position.fromId(position);
-    }
-
-    public void setType(ActType type) {
+    public void setType(ActionType type) {
         this.type = type == null ? null : type.getId();
     }
 
-    public ActType getType() {
-        return type == null ? null : ActType.fromId(type);
+    public ActionType getType() {
+        return type == null ? null : ActionType.fromId(type);
     }
 
     public void setWorkDays(Integer workDays) {

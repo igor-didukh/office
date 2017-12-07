@@ -1,9 +1,20 @@
 package com.company.office.web.screens;
 
 import com.company.office.OfficeConfig;
+import com.haulmont.cuba.core.entity.FileDescriptor;
+import com.haulmont.cuba.core.global.FileLoader;
+import com.haulmont.cuba.core.global.FileStorageException;
+import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.components.*;
+import com.haulmont.cuba.gui.export.ExportDisplay;
+import com.haulmont.cuba.gui.export.ExportFormat;
 
 import javax.inject.Inject;
+import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Map;
 
 public class MainSettingsScreen extends AbstractWindow {
@@ -78,5 +89,35 @@ public class MainSettingsScreen extends AbstractWindow {
 
     public void onBtnCancelClick() {
         this.close("");
+    }
+
+    @Inject
+    private Metadata metadata;
+
+    @Inject
+    private FileLoader fileLoader;
+
+    @Inject
+    private ExportDisplay exportDisplay;
+
+
+
+    public void onBtnDownloadClick() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        FileDescriptor fileDescriptor = metadata.create(FileDescriptor.class);
+        //FileDescriptor fileDescriptor = new FileDescriptor();
+        fileDescriptor.setName("ssh access to github.pdf");
+        //fileDescriptor.setId("e778b81f-4e64-5094-6c5a-c65fcf205136");
+        try {
+            fileDescriptor.setCreateDate(dateFormat.parse("2017-12-07 16:09:35"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        exportDisplay.show(fileDescriptor, ExportFormat.OCTET_STREAM);
+
+
+
     }
 }

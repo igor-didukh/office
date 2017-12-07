@@ -25,4 +25,17 @@
                       view="_minimal"/>
         </property>
     </view>
+    <view class="com.company.office.entity.Step"
+          extends="_local"
+          name="step-view">
+        <property name="user"
+                  view="_minimal"/>
+        <property name="actions"
+                  view="_minimal">
+            <property name="type"/>
+            <property name="description"/>
+            <property name="workDays"/>
+            <property name="resultRequired"/>
+        </property>
+    </view>
 </views>

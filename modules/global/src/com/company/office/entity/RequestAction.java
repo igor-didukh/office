@@ -11,9 +11,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import com.haulmont.cuba.core.entity.StandardEntity;
 
-@Table(name = "OFFICE_REQUEST_ACT")
-@Entity(name = "office$RequestAct")
-public class RequestAct extends StandardEntity {
+@Table(name = "OFFICE_REQUEST_ACTION")
+@Entity(name = "office$RequestAction")
+public class RequestAction extends StandardEntity {
     private static final long serialVersionUID = 1692244204168907981L;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -22,7 +22,7 @@ public class RequestAct extends StandardEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ACT_ID")
-    protected Act act;
+    protected StepAction act;
 
     @Column(name = "DESCRIPTION", length = 100)
     protected String description;
@@ -41,6 +41,16 @@ public class RequestAct extends StandardEntity {
 
     @Column(name = "RESULT_")
     protected String result;
+
+    public StepAction getAct() {
+        return act;
+    }
+
+    public void setAct(StepAction act) {
+        this.act = act;
+    }
+
+
 
     public void setResult(String result) {
         this.result = result;
@@ -85,14 +95,6 @@ public class RequestAct extends StandardEntity {
         return deadline;
     }
 
-
-    public void setAct(Act act) {
-        this.act = act;
-    }
-
-    public Act getAct() {
-        return act;
-    }
 
     public void setCreated(Date created) {
         this.created = created;

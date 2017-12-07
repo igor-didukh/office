@@ -5,14 +5,14 @@ import com.haulmont.chile.core.datatypes.impl.EnumClass;
 import javax.annotation.Nullable;
 
 
-public enum ActType implements EnumClass<String> {
+public enum ActionType implements EnumClass<String> {
 
     sendFile("file"),
     sendMessage("message");
 
     private String id;
 
-    ActType(String value) {
+    ActionType(String value) {
         this.id = value;
     }
 
@@ -21,8 +21,8 @@ public enum ActType implements EnumClass<String> {
     }
 
     @Nullable
-    public static ActType fromId(String id) {
-        for (ActType at : ActType.values()) {
+    public static ActionType fromId(String id) {
+        for (ActionType at : ActionType.values()) {
             if (at.getId().equals(id)) {
                 return at;
             }

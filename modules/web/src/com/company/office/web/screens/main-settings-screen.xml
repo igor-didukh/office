@@ -30,6 +30,19 @@
                          nullOptionVisible="false"
                          optionsDatasource="groupsDs"
                          required="true"/>
+            <upload id="upload1"
+                    caption="File1"
+                    dropZone="dropZone"
+                    dropZonePrompt="Drag files here to upload..."
+                    showClearButton="true"
+                    showFileName="true"/>
+            <vbox id="dropZone"
+                  height="100px"
+                  spacing="true"
+                  stylename="dropzone-container">
+                <label align="MIDDLE_CENTER"
+                       value="Drop file here"/>
+            </vbox>
         </groupBox>
         <buttonsPanel>
             <button id="btnOk"
@@ -38,6 +51,9 @@
             <button id="btnCancel"
                     caption="msg://settingsDialog.btnCancel"
                     invoke="onBtnCancelClick"/>
+            <linkButton id="btnDownload"
+                        caption="Get File"
+                        invoke="onBtnDownloadClick"/>
         </buttonsPanel>
     </layout>
 </window>
