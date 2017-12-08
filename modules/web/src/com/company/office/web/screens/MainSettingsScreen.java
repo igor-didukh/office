@@ -1,20 +1,11 @@
 package com.company.office.web.screens;
 
 import com.company.office.OfficeConfig;
-import com.haulmont.cuba.core.entity.FileDescriptor;
-import com.haulmont.cuba.core.global.FileLoader;
-import com.haulmont.cuba.core.global.FileStorageException;
-import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.export.ExportDisplay;
 import com.haulmont.cuba.gui.export.ExportFormat;
 
 import javax.inject.Inject;
-import java.io.InputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Map;
 
 public class MainSettingsScreen extends AbstractWindow {
@@ -26,6 +17,9 @@ public class MainSettingsScreen extends AbstractWindow {
 
     @Inject
     private LookupField lookupWorkersGroup;
+
+    @Inject
+    private LookupField lookupFile1;
 
     @Inject
     private OfficeConfig officeConfig;
@@ -40,6 +34,9 @@ public class MainSettingsScreen extends AbstractWindow {
 
         if (officeConfig.getWorkersGroup() != null)
             lookupWorkersGroup.setValue(officeConfig.getWorkersGroup());
+
+        if (officeConfig.getFile1() != null)
+            lookupFile1.setValue(officeConfig.getFile1());
     }
 
     public void onBtnOkClick() {
@@ -52,7 +49,7 @@ public class MainSettingsScreen extends AbstractWindow {
                             if (lookupApplicantsGroup.getValue() == null) {
                                 showMessageDialog(
                                         getMessage("settingsDialog.warning.empty.title"),
-                                        getMessage("settingsDialog.warning.empty.applicantsGroup"),
+                                        String.format(getMessage("settingsDialog.warning.empty.msg"),"Applicant"),
                                         MessageType.WARNING.modal(true).closeOnClickOutside(true)
                                 );
                                 return;
@@ -61,7 +58,7 @@ public class MainSettingsScreen extends AbstractWindow {
                             if (lookupWorkersGroup.getValue() == null) {
                                 showMessageDialog(
                                         getMessage("settingsDialog.warning.empty.title"),
-                                        getMessage("settingsDialog.warning.empty.workersGroup"),
+                                        String.format(getMessage("settingsDialog.warning.empty.msg"),"Worker"),
                                         MessageType.WARNING.modal(true).closeOnClickOutside(true)
                                 );
                                 return;
@@ -80,6 +77,9 @@ public class MainSettingsScreen extends AbstractWindow {
                             officeConfig.setApplicantsGroup(lookupApplicantsGroup.getValue());
                             officeConfig.setWorkersGroup(lookupWorkersGroup.getValue());
 
+                            if (lookupFile1.getValue() != null)
+                                officeConfig.setFile1(lookupFile1.getValue());
+
                             this.close("");
                         }),
                         new DialogAction(DialogAction.Type.NO, Action.Status.PRIMARY)
@@ -92,32 +92,10 @@ public class MainSettingsScreen extends AbstractWindow {
     }
 
     @Inject
-    private Metadata metadata;
-
-    @Inject
-    private FileLoader fileLoader;
-
-    @Inject
     private ExportDisplay exportDisplay;
 
-
-
-    public void onBtnDownloadClick() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        FileDescriptor fileDescriptor = metadata.create(FileDescriptor.class);
-        //FileDescriptor fileDescriptor = new FileDescriptor();
-        fileDescriptor.setName("ssh access to github.pdf");
-        //fileDescriptor.setId("e778b81f-4e64-5094-6c5a-c65fcf205136");
-        try {
-            fileDescriptor.setCreateDate(dateFormat.parse("2017-12-07 16:09:35"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        exportDisplay.show(fileDescriptor, ExportFormat.OCTET_STREAM);
-
-
-
+    public void onBtnFile1Click() {
+        if (lookupFile1.getValue() != null)
+            exportDisplay.show(lookupFile1.getValue(), ExportFormat.OCTET_STREAM);
     }
 }

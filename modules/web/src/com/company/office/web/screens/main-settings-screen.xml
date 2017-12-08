@@ -11,37 +11,49 @@
                 <![CDATA[select e from sec$Group e]]>
             </query>
         </collectionDatasource>
+        <collectionDatasource id="fileDescriptorsDs"
+                              class="com.haulmont.cuba.core.entity.FileDescriptor">
+            <query>
+                <![CDATA[select e from sys$FileDescriptor e]]>
+            </query>
+        </collectionDatasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
     <layout>
         <groupBox id="boxSettings"
-                  spacing="true">
-            <textField id="txtCompanyName"
-                       caption="msg://settingsDialog.companyName"
-                       width="300px"/>
-            <lookupField id="lookupApplicantsGroup"
-                         caption="msg://settingsDialog.applicantsGroup"
-                         nullOptionVisible="false"
-                         optionsDatasource="groupsDs"
-                         required="true"/>
-            <lookupField id="lookupWorkersGroup"
-                         caption="msg://settingsDialog.workersGroup"
-                         nullOptionVisible="false"
-                         optionsDatasource="groupsDs"
-                         required="true"/>
-            <upload id="upload1"
-                    caption="File1"
-                    dropZone="dropZone"
-                    dropZonePrompt="Drag files here to upload..."
-                    showClearButton="true"
-                    showFileName="true"/>
-            <vbox id="dropZone"
-                  height="100px"
+                  orientation="horizontal"
                   spacing="true"
-                  stylename="dropzone-container">
-                <label align="MIDDLE_CENTER"
-                       value="Drop file here"/>
+                  width="100%">
+            <vbox id="leftBox"
+                  spacing="true">
+                <textField id="txtCompanyName"
+                           caption="msg://settingsDialog.companyName"
+                           width="300px"/>
+                <lookupField id="lookupApplicantsGroup"
+                             caption="msg://settingsDialog.applicantsGroup"
+                             nullOptionVisible="false"
+                             optionsDatasource="groupsDs"
+                             width="300px"/>
+                <lookupField id="lookupWorkersGroup"
+                             caption="msg://settingsDialog.workersGroup"
+                             nullOptionVisible="false"
+                             optionsDatasource="groupsDs"
+                             required="true"
+                             width="300px"/>
+            </vbox>
+            <vbox id="filesBox"
+                  spacing="true">
+                <hbox id="boxFile1"
+                      spacing="true">
+                    <lookupField id="lookupFile1"
+                                 caption="File1"
+                                 optionsDatasource="fileDescriptorsDs"
+                                 width="300px"/>
+                    <linkButton id="btnFile1"
+                                caption="msg://settingsDialog.btnFileDownload"
+                                invoke="onBtnFile1Click"/>
+                </hbox>
             </vbox>
         </groupBox>
         <buttonsPanel>
@@ -51,9 +63,6 @@
             <button id="btnCancel"
                     caption="msg://settingsDialog.btnCancel"
                     invoke="onBtnCancelClick"/>
-            <linkButton id="btnDownload"
-                        caption="Get File"
-                        invoke="onBtnDownloadClick"/>
         </buttonsPanel>
     </layout>
 </window>
